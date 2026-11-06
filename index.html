@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milon Rana | Student, Developer &amp; Creator</title>
+    <meta name="description"
+        content="Portfolio of Milon Rana, a student from Bangladesh learning to code, building small projects and documenting the journey.">
+    <meta name="theme-color" content="#07070b">
+    <meta property="og:title" content="Milon Rana | Student, Developer &amp; Creator">
+    <meta property="og:description" content="I'm here to document how I'm building my future.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07070b;
+            --panel: #101018;
+            --line: rgba(255, 255, 255, .09);
+            --text: #ecebf5;
+            --muted: #9a99b0;
+            --violet: #8b5cf6;
+            --purple: #a855f7;
+            --cyan: #22d3ee;
+            --grad: linear-gradient(120deg, var(--purple), var(--violet) 55%, var(--cyan));
+            --font: "Space Grotesk", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+            --r: 16px;
+            --max: 1080px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font: 400 1rem/1.7 var(--font);
+            overflow-x: hidden
+        }
+
+        a {
+            color: var(--cyan);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            padding: 0
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 3px;
+            border-radius: 6px
+        }
+
+        .skip {
+            position: absolute;
+            left: -999px;
+            top: 8px;
+            background: var(--violet);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            z-index: 100
+        }
+
+        .skip:focus {
+            left: 8px
+        }
+
+        /* animated background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(var(--line) 1px, transparent 1px) 0 0/56px 56px,
+                linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/56px 56px;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+            animation: grid 14s linear infinite
+        }
+
+        .glow {
+            position: fixed;
+            width: 42vw;
+            height: 42vw;
+            border-radius: 50%;
+            filter: blur(110px);
+            opacity: .28;
+            animation: drift 18s ease-in-out infinite alternate
+        }
+
+        .g1 {
+            background: var(--violet);
+            top: -12vw;
+            left: -8vw
+        }
+
+        .g2 {
+            background: var(--cyan);
+            opacity: .14;
+            bottom: -16vw;
+            right: -10vw;
+            animation-delay: -9s
+        }
+
+        @keyframes grid {
+            to {
+                background-position: 0 56px, 56px 0
+            }
+        }
+
+        @keyframes drift {
+            to {
+                transform: translate(6vw, 5vw) scale(1.12)
+            }
+        }
+
+        /* nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 5vw;
+            background: rgba(7, 7, 11, .72);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: .04em;
+            padding: 6px 12px;
+            border-radius: 10px;
+            background: var(--grad);
+            color: #07070b
+        }
+
+        .logo:hover {
+            text-decoration: none;
+            filter: brightness(1.1)
+        }
+
+        nav ul {
+            display: flex;
+            gap: 6px
+        }
+
+        nav a {
+            display: block;
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: .95rem;
+            transition: color .2s, background .2s
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--text);
+            background: rgba(139, 92, 246, .16);
+            text-decoration: none
+        }
+
+        .burger {
+            display: none;
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px
+        }
+
+        .burger span {
+            width: 18px;
+            height: 2px;
+            background: var(--text);
+            transition: transform .25s
+        }
+
+        .burger[aria-expanded=true] span:first-child {
+            transform: translateY(4px) rotate(45deg)
+        }
+
+        .burger[aria-expanded=true] span:last-child {
+            transform: translateY(-4px) rotate(-45deg)
+        }
+
+        /* layout */
+        section {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 96px 5vw
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1.15;
+            margin-bottom: 12px
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            line-height: 1.3
+        }
+
+        .sub {
+            color: var(--muted);
+            margin-bottom: 32px
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            backdrop-filter: blur(12px);
+            padding: 24px
+        }
+
+        /* hero */
+        .hero {
+            min-height: calc(100vh - 70px);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            align-items: center;
+            gap: 48px;
+            padding-top: 60px
+        }
+
+        .portrait {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px
+        }
+
+        .photo {
+            position: relative;
+            width: min(300px, 70vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            padding: 4px;
+            background: var(--grad);
+            box-shadow: 0 0 70px rgba(139, 92, 246, .4)
+        }
+
+        .photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: var(--panel)
+        }
+
+        .photo.noimg::after {
+            content: "MR";
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--panel);
+            font: 700 4rem var(--font);
+            color: var(--violet)
+        }
+
+        .portrait figcaption {
+            padding: 8px 24px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(12px);
+            font-weight: 500;
+            animation: pop .7s cubic-bezier(.2, 1.6, .4, 1) .9s both
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(-14px) scale(.6)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .label {
+            color: var(--cyan);
+            font-size: .85rem;
+            letter-spacing: .18em;
+            margin-bottom: 18px
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 7vw, 4.6rem);
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            max-width: 15ch
+        }
+
+        .type {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+
+        .type::after {
+            content: "";
+            display: inline-block;
+            width: 3px;
+            height: .9em;
+            margin-left: 4px;
+            background: var(--cyan);
+            vertical-align: -.08em;
+            animation: blink 1s steps(1) infinite
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0
+            }
+        }
+
+        .name {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin: 20px 0 8px;
+            font-weight: 500
+        }
+
+        .lead {
+            color: var(--muted);
+            max-width: 52ch;
+            font-size: 1.1rem
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 32px 0
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 26px;
+            border-radius: 999px;
+            font: 500 1rem var(--font);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform .2s, box-shadow .2s, background .2s
+        }
+
+        .btn:hover {
+            text-decoration: none;
+            transform: translateY(-2px)
+        }
+
+        .primary {
+            background: var(--grad);
+            color: #07070b;
+            box-shadow: 0 8px 30px rgba(139, 92, 246, .35)
+        }
+
+        .primary:hover {
+            box-shadow: 0 10px 38px rgba(139, 92, 246, .55)
+        }
+
+        .ghost {
+            border-color: var(--line);
+            color: var(--text);
+            background: rgba(255, 255, 255, .03)
+        }
+
+        .ghost:hover {
+            border-color: var(--violet);
+            background: rgba(139, 92, 246, .12)
+        }
+
+        .quote {
+            margin-top: 24px;
+            padding-left: 18px;
+            border-left: 2px solid var(--violet);
+            color: var(--muted);
+            max-width: 60ch;
+            font-style: italic
+        }
+
+        /* about + skills */
+        .about {
+            max-width: 70ch;
+            display: grid;
+            gap: 14px
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px
+        }
+
+        .skills li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--panel);
+            transition: border-color .2s
+        }
+
+        .skills li:hover {
+            border-color: var(--violet)
+        }
+
+        .skills em {
+            font-style: normal;
+            font-size: .85rem;
+            color: var(--cyan);
+            padding: 3px 12px;
+            border: 1px solid rgba(34, 211, 238, .35);
+            border-radius: 999px
+        }
+
+        /* projects */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 18px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            transition: transform .25s, border-color .25s, box-shadow .25s
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, .6);
+            box-shadow: 0 14px 40px rgba(139, 92, 246, .15)
+        }
+
+        .shot {
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 255, 255, .18);
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            font-size: .85rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, .1), rgba(34, 211, 238, .06))
+        }
+
+        .status {
+            align-self: flex-start;
+            font-size: .78rem;
+            color: var(--violet);
+            background: rgba(139, 92, 246, .14);
+            padding: 2px 10px;
+            border-radius: 999px
+        }
+
+        .status.warn {
+            color: #f0b429;
+            background: rgba(240, 180, 41, .12)
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: .95rem;
+            flex: 1
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        .tags li {
+            font-size: .78rem;
+            padding: 2px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, .06);
+            color: var(--text)
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            font-size: .9rem
+        }
+
+        .off,
+        .muted,
+        .channels em {
+            color: var(--muted);
+            font-style: normal
+        }
+
+        .gh {
+            margin-top: 32px
+        }
+
+        .grp {
+            margin: 48px 0 16px;
+            color: var(--muted);
+            font-weight: 500
+        }
+
+        .gh-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px
+        }
+
+        .gh-head img {
+            border-radius: 50%;
+            border: 2px solid var(--violet)
+        }
+
+        #repos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px
+        }
+
+        #repos li {
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 12px
+        }
+
+        #repos li.muted {
+            grid-column: 1/-1;
+            border: 0;
+            padding: 0
+        }
+
+        #repos p {
+            color: var(--muted);
+            font-size: .88rem
+        }
+
+        #repos small {
+            color: var(--cyan)
+        }
+
+        .shot {
+            overflow: hidden
+        }
+
+        .shot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .shot:not(.noimg) span {
+            display: none
+        }
+
+        .vbtn {
+            background: none;
+            border: 0;
+            color: var(--cyan);
+            font: inherit;
+            cursor: pointer;
+            padding: 0
+        }
+
+        .vbtn:hover {
+            text-decoration: underline
+        }
+
+        dialog {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--panel);
+            color: var(--text);
+            padding: 14px;
+            width: min(900px, 92vw);
+            margin: auto
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, .78);
+            backdrop-filter: blur(4px)
+        }
+
+        #vbox video,
+        #vbox iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 0;
+            border-radius: 10px;
+            background: #000
+        }
+
+        .vclose {
+            position: absolute;
+            top: -14px;
+            right: -8px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer
+        }
+
+        /* timeline */
+        .timeline {
+            position: relative;
+            margin-left: 12px;
+            padding-left: 34px;
+            display: grid;
+            gap: 30px;
+            border-left: 2px solid transparent;
+            border-image: linear-gradient(var(--violet), var(--cyan), transparent) 1
+        }
+
+        .timeline li {
+            position: relative
+        }
+
+        .timeline li::before {
+            content: "";
+            position: absolute;
+            left: -43px;
+            top: 7px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--violet);
+            box-shadow: 0 0 14px var(--violet)
+        }
+
+        .timeline .future::before {
+            border-color: var(--cyan);
+            box-shadow: 0 0 14px var(--cyan);
+            border-style: dashed
+        }
+
+        .timeline p {
+            color: var(--muted);
+            max-width: 60ch
+        }
+
+        .small .glass p {
+            color: var(--muted);
+            font-size: .95rem;
+            margin-top: 6px
+        }
+
+        /* contact */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 24px
+        }
+
+        .channels {
+            display: grid;
+            gap: 14px;
+            align-content: start
+        }
+
+        .channels li {
+            display: flex;
+            flex-direction: column
+        }
+
+        .channels span {
+            font-size: .85rem;
+            color: var(--muted)
+        }
+
+        .form {
+            display: grid;
+            gap: 8px
+        }
+
+        .demo {
+            font-size: .85rem;
+            color: #f0b429;
+            background: rgba(240, 180, 41, .1);
+            padding: 8px 12px;
+            border-radius: 8px
+        }
+
+        label {
+            font-size: .9rem;
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: rgba(0, 0, 0, .35);
+            color: var(--text);
+            font: inherit
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--violet);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, .25)
+        }
+
+        .form .btn {
+            justify-self: start;
+            margin-top: 10px
+        }
+
+        #status {
+            min-height: 1.5em;
+            font-size: .92rem
+        }
+
+        #status.err {
+            color: #ff7a90
+        }
+
+        #status.ok {
+            color: #4ade80
+        }
+
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 32px 5vw;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: .9rem;
+            max-width: var(--max);
+            margin: 0 auto
+        }
+
+        /* scroll reveal */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease
+        }
+
+        .js .reveal.in {
+            opacity: 1;
+            transform: none
+        }
+
+        @media(max-width:820px) {
+            .burger {
+                display: flex
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(7, 7, 11, .96);
+                border-bottom: 1px solid var(--line);
+                display: none
+            }
+
+            nav.open {
+                display: block
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 12px 5vw
+            }
+
+            .contact {
+                grid-template-columns: 1fr
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 32px
+            }
+
+            .portrait {
+                order: -1
+            }
+
+            .photo {
+                width: min(200px, 55vw)
+            }
+
+            section {
+                padding: 72px 5vw
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .js .reveal {
+                opacity: 1;
+                transform: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="bg" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+
+    <header class="nav" id="top">
+        <a class="logo" href="#home" aria-label="Milon Rana, home">Milon Rana</a>
+        <button class="burger" aria-expanded="false" aria-controls="menu"
+            aria-label="Toggle menu"><span></span><span></span></button>
+        <nav aria-label="Main">
+            <ul id="menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#creator">Creator</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section id="home" class="hero">
+            <div class="hero-text">
+                <p class="label">STUDENT • DEVELOPER • CREATOR</p>
+                <h1>Curiosity turns <span class="type"
+                        data-words='["ideas into reality.","questions into projects.","learning into building."]'>ideas
+                        into reality.</span></h1>
+                <p class="name">I'm Milon Rana.</p>
+                <p class="lead">A student exploring technology, building small projects, and documenting the journey
+                    from learning to creating.</p>
+                <div class="actions"><a class="btn primary" href="#projects">Explore My Work</a><a class="btn ghost"
+                        href="#contact">Let's Connect</a></div>
+                <blockquote class="quote">I'm not here to show that I've already made it. I'm here to document how I'm
+                    building my future.</blockquote>
+            </div>
+            <figure class="portrait">
+                <div class="photo"><img src="milonrana.jpg" alt="Portrait of Milon Rana" width="250" height="250"
+                        decoding="async" onerror="this.parentNode.classList.add('noimg');this.remove()"></div>
+                <figcaption>Milon Rana</figcaption>
+            </figure>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2>About</h2>
+            <div class="glass about">
+                <p>I'm a student from Bangladesh who likes figuring out how things work. Most of what I know, I learned
+                    by myself: reading, watching, trying things and breaking them.</p>
+                <p>I'm still early. I experiment a lot, get stuck often, and treat every bug as a lesson in
+                    problem-solving. What matters to me is getting a little better each week.</p>
+                <p>This site is a public notebook, not a trophy case. It shows what I'm learning, what I'm building, and
+                    where I'm heading.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2>Skills</h2>
+            <p class="sub">An honest snapshot of where I am right now.</p>
+            <ul class="skills">
+                <li><span>Python</span><em>Beginner</em></li>
+                <li><span>C Programming</span><em>Learning</em></li>
+                <li><span>HTML</span><em>Learning</em></li>
+                <li><span>CSS</span><em>Learning</em></li>
+                <li><span>JavaScript</span><em>Learning</em></li>
+                <li><span>Problem Solving</span><em>Developing</em></li>
+                <li><span>Content Creation</span><em>Exploring</em></li>
+                <li><span>Video Editing</span><em>Learning</em></li>
+            </ul>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2>Projects</h2>
+            <p class="sub">Small, early and honest about their status. Code projects first, then video and motion
+                practice.</p>
+            <div class="cards">
+                <article class="card">
+                    <div class="shot"><img src="images.jpg"
+                            alt="Preview of Personal Productivity Tools" loading="lazy"
+                            onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/productivity-tools.jpg</span></div>
+                    <h3>Personal Productivity Tools</h3><span class="status">Productivity</span>
+                    <p>Small scripts and tools I'm building to organise my own study routine and tasks.</p>
+                    <ul class="tags">
+                        <li>Python</li>
+                        <li>Learning project</li>
+                    </ul>
+                    <div class="links">
+                        <a href="https://drive.google.com/file/d/1TbQJ4KZuEc_9bHklWeWQwT-ME4blU4z6/view?usp=drive_link">Get the Tools</a>
+                        <span class="off"> Increase your proctivity</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="62b264ced6e2c5184b2ce2d4_The_8_Best_TTS_Voice_Providers.jpg" alt="Preview of Python Text-to-Speech"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/python-tts.jpg</span></div>
+                    <h3>Python Text-to-Speech</h3><span class="status">Learning project</span>
+                    <p>An exercise in turning typed text into spoken audio with Python.</p>
+                    <ul class="tags">
+                        <li>Python</li>
+                        <li>Audio</li>
+                    </ul>
+                    <div class="links">
+                        <a href="milon_text_reader.py">Get Python Code</a>
+                        <span class="off">Use it on your daily life</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="shortsdownloader.jpg" alt="Preview of YouTube Shorts Utility"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/shorts-utility.jpg</span></div>
+                    <h3>YouTube Shorts Utility</h3><span class="status warn">Experimental concept</span>
+                    <p>An idea for a helper that could speed up making short videos. It's a concept only; nothing is
+                        finished yet.</p>
+                    <ul class="tags">
+                        <li>Concept</li>
+                        <li>Python (planned)</li>
+                    </ul>
+                    <div class="links">
+                        <a href="www.google.com">Try it Now</a>
+                        <span class="off">Download shorts without ad</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="1563704499299.jpg" alt="Preview of Personal Portfolio" loading="lazy"
+                            onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/portfolio.jpg</span></div>
+                    <h3>Personal Portfolio</h3><span class="status">First version</span>
+                    <p>This website, built with plain HTML, CSS and JavaScript as a way to practise web fundamentals.
+                    </p>
+                    <ul class="tags">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                    </ul>
+                    <div class="links"><a href="#home">You're viewing
+                            it</a></div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="how-to-block-websites-on-chrome-mobile.jpg" alt="Preview of Site Blocker Chrome Extension"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/site-blocker.jpg</span></div>
+                    <h3>Site Blocker Chrome Extension</h3><span class="status">Completed</span>
+                    <p>A Chrome extension that blocks distracting websites I choose. It has a focus timer, import and
+                        export of the block list, and a typing challenge that must be completed before the block can be
+                        turned off.</p>
+                    <ul class="tags">
+                        <li>JavaScript</li>
+                        <li>Chrome Extension</li>
+                        <li>Manifest V3</li>
+                    </ul>
+                    <div class="links"><a
+                            href="https://drive.google.com/file/d/1IKvDW0e-9AvkFb5E5zgaqLmzaJtBQlaJ/view?usp=drive_link" download>Download code (.zip)</a></div>
+                </article>
+            </div>
+
+            <h3 class="grp">Video and motion practice</h3>
+            <div class="cards">
+                <article class="card">
+                    <div class="shot"><img src="logaster-2020-03-amazon-gif-logo.jpg" alt="Preview of City Text Reveal"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/city-text-reveal.jpg</span></div>
+                    <h3>Navbar Design</h3><span class="status">Practice piece</span>
+                    <p>A short video where Ghorer Bazar look like Amazon.</p>
+                    <ul class="tags">
+                        <li>Video editing</li>
+                        <li>Web Development</li>
+                    </ul>
+                    <div class="links">
+                        <button class="vbtn"
+                            type="button" data-video="Video Project.mp4"
+                            data-poster="images/city-text-reveal.jpg">Watch video</button>
+                        </div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="what-is-microsoft-company-qz-1200x630.jpg" alt="Preview of Microsoft Logo Animation"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/logo-animation.jpg</span></div>
+                    <h3>Microsoft Logo Animation</h3><span class="status">Practice piece</span>
+                    <p>An After Effects project from my motion graphics practice, built around a logo animation.</p>
+                    <ul class="tags">
+                        <li>After Effects</li>
+                        <li>Motion graphics</li>
+                    </ul>
+                    <div class="links"><span class="off"><a href=""></a></span></div>
+                </article>
+                <article class="card">
+                    <div class="shot"><img src="movie-banner-1024x427.jpg" alt="Preview of Sequence 01 Video Edit"
+                            loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"><span>Add
+                            images/sequence-01.jpg</span></div>
+                    <h3>Top Movies name</h3><span class="status">Practice piece</span>
+                    <p>A short edited video sequence from my video editing practice.</p>
+                    <ul class="tags">
+                        <li>Video editing</li>
+                        <li>1080p</li>
+                    </ul>
+                    <div class="links">
+                        <button class="vbtn"
+                            type="button" data-video="Sequence 01.mp4" data-poster="images/sequence-01.jpg">Watch
+                            video</button>
+                        </div>
+                </article>
+            </div>
+
+            <div class="glass gh" id="github">
+                <div class="gh-head">
+                    <img id="avatar" alt="" width="56" height="56" loading="lazy"
+                        src="https://github.com/milonrana12712038.png?size=112">
+                    <div>
+                        <h3>Public repositories</h3><a href="https://github.com/milonrana12712038" target="_blank"
+                            rel="noopener noreferrer">github.com/milonrana12712038</a>
+                    </div>
+                </div>
+                <ul id="repos" aria-live="polite">
+                    <li class="muted">Loading repositories…</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="journey" class="reveal">
+            <h2>Journey</h2>
+            <ol class="timeline">
+                <li>
+                    <h3>Programming fundamentals</h3>
+                    <p>Started with the basics: variables, logic, loops and how to think through a problem step by step.
+                    </p>
+                </li>
+                <li>
+                    <h3>Learning Python</h3>
+                    <p>My first language. Writing small scripts taught me how to read errors and fix my own mistakes.
+                    </p>
+                </li>
+                <li>
+                    <h3>Exploring C</h3>
+                    <p>Looking closer at how computers work, with more detail and less hand-holding.</p>
+                </li>
+                <li>
+                    <h3>Web development experiments</h3>
+                    <p>Practising HTML, CSS and JavaScript by building pages like this one.</p>
+                </li>
+                <li>
+                    <h3>Video editing</h3>
+                    <p>Practising Adobe Software to improve myself.</p>
+                </li>
+                <li class="future">
+                    <h3>What's next</h3>
+                    <p>Build more complete projects, keep sharing what I learn, and grow my creative work alongside my
+                        code.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="creator" class="reveal">
+            <h2>Creator</h2>
+            <p class="sub">Alongside code, I'm exploring how to tell stories online.</p>
+            <div class="cards small">
+                <div class="glass">
+                    <h3>YouTube</h3>
+                    <p>Interested in making videos and learning how the platform works.</p>
+                </div>
+                <div class="glass">
+                    <h3>Educational entertainment</h3>
+                    <p>Making learning fun enough that people want to keep watching.</p>
+                </div>
+                <div class="glass">
+                    <h3>Student life</h3>
+                    <p>Sharing the honest side of studying, practising and figuring things out.</p>
+                </div>
+                <div class="glass">
+                    <h3>Video Editing</h3>
+                    <p>Recently i have started to learn Adobe Premiere Pro, Adobe After Effect.</p>
+                </div>
+                <div class="glass">
+                    <h3>Creative storytelling</h3>
+                    <p>Using ideas, visuals and narrative to make small things memorable.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2>Contact</h2>
+            <div class="contact">
+                <ul class="glass channels">
+                    <li><span>GitHub</span><a href="https://github.com/milonrana12712038" target="_blank"
+                            rel="noopener noreferrer">milonrana12712038</a></li>
+                    <li><span>Email</span><em><a href="milonrana5409@gmail.com">milonrana5409@gmail.com</a></em></li>
+                    <li><span>YouTube</span><em><a href="https://www.youtube.com/@Milon_Rana">Milon Rana</a></em></li>
+                    <li><span>Whatsapp</span><em><a href="01728179250">01728179250</a></em></li>
+                </ul>
+                <form class="glass form" id="form" novalidate>
+                    <p class="demo">Type your message to me.</p>
+                    <label for="n">Name</label><input id="n" name="name" required autocomplete="name">
+                    <label for="e">Email</label><input id="e" name="email" type="email" required autocomplete="email">
+                    <label for="m">Message</label><textarea id="m" name="message" rows="4" required></textarea>
+                    <button class="btn primary" type="submit">Send message</button>
+                    <p id="status" role="status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2026</span> Milon Rana. Built with HTML, CSS and JavaScript.</p><a href="#top">Back to
+            top</a>
+    </footer>
+    <dialog id="vmodal" aria-label="Project video"><button class="vclose" type="button"
+            aria-label="Close video">×</button>
+        <div id="vbox"></div>
+    </dialog>
+    <script>
+        "use strict";
+
+        /* ---------- Settings you can change ---------- */
+        const CONFIG = {
+            githubUser: "milonrana12712038",
+            maxRepos: 6,
+            // Paste a form endpoint here (for example a Formspree URL like
+            // "https://formspree.io/f/yourFormId") to make the contact form real.
+            // While this is empty, the form runs in demo mode and sends nothing.
+            formEndpoint: ""
+        };
+
+        document.documentElement.classList.add("js");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const $ = (s, el = document) => el.querySelector(s);
+        const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+
+        /* ---------- Mobile menu ---------- */
+        const burger = $(".burger");
+        const nav = $("header nav");
+        const setMenu = open => {
+            nav.classList.toggle("open", open);
+            burger.setAttribute("aria-expanded", String(open));
+        };
+        burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
+        $$("#menu a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+        document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+        /* ---------- Scroll reveal + active link ---------- */
+        const revealObs = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        $$(".reveal").forEach(el => revealObs.observe(el));
+
+        const links = $$("#menu a");
+        const navObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+                }
+            });
+        }, { rootMargin: "-45% 0px -50% 0px" });
+        $$("main section[id]").forEach(s => navObs.observe(s));
+
+        /* ---------- Typing animation ---------- */
+        const typeEl = $(".type");
+        if (typeEl && !reduceMotion) {
+            const words = JSON.parse(typeEl.dataset.words);
+            let w = 0, i = words[0].length, deleting = true;
+            const tick = () => {
+                const word = words[w];
+                typeEl.textContent = word.slice(0, i);
+                let delay = deleting ? 35 : 70;
+                if (!deleting && i === word.length) { deleting = true; delay = 2200; }
+                else if (deleting && i === 0) { deleting = false; w = (w + 1) % words.length; delay = 300; }
+                else i += deleting ? -1 : 1;
+                setTimeout(tick, delay);
+            };
+            setTimeout(tick, 2600);
+        }
+
+        /* ---------- GitHub repositories ---------- */
+        async function loadRepos() {
+            const list = $("#repos");
+            const message = text => { list.innerHTML = ""; const li = document.createElement("li"); li.className = "muted"; li.textContent = text; list.append(li); };
+            try {
+                const res = await fetch(`https://api.github.com/users/${CONFIG.githubUser}/repos?sort=updated&per_page=${CONFIG.maxRepos}`, { headers: { Accept: "application/vnd.github+json" } });
+                if (res.status === 403 || res.status === 429) throw new Error("rate");
+                if (!res.ok) throw new Error("http");
+                const repos = (await res.json()).filter(r => !r.fork);
+                if (!repos.length) return message("No public repositories yet. New work will show up here.");
+                list.innerHTML = "";
+                repos.forEach(r => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = r.html_url; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = r.name;
+                    const p = document.createElement("p");
+                    p.textContent = r.description || "No description yet.";
+                    const s = document.createElement("small");
+                    s.textContent = r.language || "";
+                    li.append(a, p, s);
+                    list.append(li);
+                });
+            } catch (err) {
+                message(err.message === "rate"
+                    ? "GitHub is limiting requests right now. Please visit the profile link above instead."
+                    : "Couldn't load repositories. Please visit the GitHub profile link above.");
+            }
+        }
+        loadRepos();
+
+        /* ---------- Contact form ---------- */
+        const form = $("#form");
+        const status = $("#status");
+        const say = (text, cls) => { status.textContent = text; status.className = cls || ""; };
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            if (!form.checkValidity()) { say("Please fill in your name, a valid email and a message.", "err"); return; }
+            if (!CONFIG.formEndpoint) { say("Demo mode: nothing was sent. Add a form endpoint in the CONFIG block to enable sending.", "err"); return; }
+            const btn = $("button", form);
+            btn.disabled = true; say("Sending…");
+            try {
+                const res = await fetch(CONFIG.formEndpoint, { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form) });
+                if (!res.ok) throw new Error();
+                form.reset(); say("Message sent. Thank you!", "ok");
+            } catch {
+                say("Couldn't send the message. Please try again later.", "err");
+            } finally { btn.disabled = false; }
+        });
+
+        /* ---------- Project links: GitHub repos and videos ---------- */
+        // Set data-repo="your-repo-name" on a project's GitHub link in the HTML to point it at that repo.
+        $$("a.gh-link").forEach(a => {
+            const repo = a.dataset.repo;
+            if (repo) { a.href = `https://github.com/${CONFIG.githubUser}/${repo}`; a.textContent = "Source on GitHub"; }
+        });
+        const modal = $("#vmodal"), vbox = $("#vbox");
+        const closeVideo = () => { vbox.innerHTML = ""; if (modal.open) modal.close(); };
+        $$(".vbtn").forEach(b => b.addEventListener("click", () => {
+            const url = b.dataset.video;
+            let el;
+            if (/youtu\.?be/.test(url)) {
+                const id = (url.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/) || [])[1];
+                if (!id) { window.open(url, "_blank", "noopener"); return; }
+                el = document.createElement("iframe");
+                el.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+                el.allow = "autoplay; encrypted-media; fullscreen"; el.allowFullscreen = true; el.title = "Project video";
+            } else {
+                el = document.createElement("video");
+                el.src = url; el.controls = true; el.autoplay = true; el.playsInline = true;
+                if (b.dataset.poster) el.poster = b.dataset.poster;
+            }
+            vbox.replaceChildren(el);
+            modal.showModal();
+        }));
+        $(".vclose").addEventListener("click", closeVideo);
+        modal.addEventListener("close", () => { vbox.innerHTML = ""; });
+        modal.addEventListener("click", e => { if (e.target === modal) closeVideo(); });
+
+        $("#year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
